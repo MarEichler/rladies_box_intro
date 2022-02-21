@@ -4,3 +4,6 @@
 .Ruserdata
 
 *.Rproj
+
+#ignore files in this folder 
+*zzzIGNORE* 

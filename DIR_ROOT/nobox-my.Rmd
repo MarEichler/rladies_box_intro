@@ -1,0 +1,478 @@
+---
+title: Prior To Box
+output: 
+  html_document:
+    number_section: false 
+    code_folding: hide
+editor_options: 
+  chunk_output_type: console
+---
+<!-- this makes the page wider --> 
+<style type="text/css">
+.main-container {
+  max-width: 1200px !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+
+```{r loadpackages, warning = FALSE, message = FALSE}
+#load packages 
+library(ggplot2)
+library(dplyr)
+library(glue) 
+library(cowplot)
+knitr::opts_chunk$set(fig.width = 12, fig.height = 12)
+```
+
+
+**Idea:** Want to show multiple plots for two different situations   
+
+A. Frequency of cars by `manufacturer`, `cyl`, `drv` and `class`   
+B. Average of `cty`  by year and `manufacturer`, `cyl`, `drv` and `class` 
+
+# {.tabset}
+
+## Option 1
+
+Write out code.  
+
+### Overview 
+
+| Namespace Usage | PROS | CONS | 
+|:----|:--------|:--------
+| **8** <br><br>1. optA1<br>2. optA2<br>3. optA3<br>4. optA4<br>5. optB1<br>6. optB2<br>7. optB3<br>8. optA4 | - Quick and easy<br>- OK if only have **1** plot output (no repeating code) | - If have more than one plot, difficult to maintain consistency and stay organized<br>- have to remember to change all plots if update formatting | 
+
+
+
+```{r option0}
+# A PLOTS 
+
+optA1<- mpg %>% 
+  count(manufacturer) %>%
+  mutate(ordered = reorder(manufacturer, n)) %>% 
+  arrange(ordered) %>% 
+ggplot(., aes(x = n, y = ordered)) + 
+  geom_col() + 
+  labs( 
+      title = "Frequency of Manufacturer"
+    , subtitle = "mpg data set"
+    , y     = "Manufacturer"
+    , x     = "Count"
+  )
+
+optA2 <- mpg %>% 
+  count(cyl) %>%
+  mutate(ordered = reorder(cyl, n)) %>% 
+  arrange(ordered) %>% 
+ggplot(., aes(x = n, y = ordered)) + 
+  geom_col() + 
+  labs( 
+      title = "Frequency of Number of Cylinders"
+    , subtitle = "mpg data set"
+    , y     = "Number of Cylinders"
+    , x     = "Count"
+  )
+
+optA3 <- mpg %>% 
+  count(drv) %>%
+  mutate(ordered = reorder(drv, n)) %>% 
+  arrange(ordered) %>% 
+ggplot(., aes(x = n, y = ordered)) + 
+  geom_col() + 
+  labs( 
+      title = "Frequency of Drive Type"
+    , subtitle = "mpg data set"
+    , y     = "Drive Type"
+    , x     = "Count"
+  )
+
+optA4 <- mpg %>% 
+  count(class) %>%
+  mutate(ordered = reorder(class, n)) %>% 
+  arrange(ordered) %>% 
+ggplot(., aes(x = n, y = ordered)) + 
+  geom_col() + 
+  labs( 
+      title = "Frequency of Class"
+    , subtitle = "mpg data set"
+    , y     = "Class"
+    , x     = "Count"
+  )
+
+
+# B PLOTS 
+
+optB1<-mpg %>% 
+  group_by(year, manufacturer) %>% 
+  summarize(mean = mean(cty), .groups = "keep") %>%  
+ggplot(., aes(x = year, y = mean, color = manufacturer)) + 
+  geom_line() +
+  geom_point() + 
+  scale_x_continuous(breaks = c(1999,2008)) + 
+  scale_color_discrete(name = "Manufacturer") + 
+  labs( 
+      title = "Average City MPG by Year and Manufacturer"
+    , y     = "Average of City Miles per Gallon"
+    , x     = "Year"
+  )
+
+optB2<-  mpg %>% 
+  group_by(year, cyl) %>%
+  summarize(mean = mean(cty), .groups = "keep") %>%  
+ggplot(., aes(x = year, y = mean, color = as.character(cyl))) + #make cyl character for discrete legend!
+  geom_line() +
+  geom_point() + 
+  scale_x_continuous(breaks = c(1999,2008)) + 
+  scale_color_discrete(name = "Number of Cylinders") + 
+  labs( 
+      title = "Average City MPG by Year and Number of Cylinders"
+    , y     = "Average of City Miles per Gallon"
+    , x     = "Year"
+  )
+
+optB3<-mpg %>% 
+  group_by(year, drv) %>% 
+  summarize(mean = mean(cty), .groups = "keep") %>%  
+ggplot(., aes(x = year, y = mean, color = drv)) + 
+  geom_line() +
+  geom_point() + 
+  scale_x_continuous(breaks = c(1999,2008)) + 
+  scale_color_discrete(name = "Drive Type") + 
+  labs( 
+      title = "Average City MPG by Year and Drive Type"
+    , y     = "Average of City Miles per Gallon"
+    , x     = "Year"
+  )
+
+optB4<-mpg %>% 
+  group_by(year, class) %>% 
+  summarize(mean = mean(cty), .groups = "keep") %>%  
+ggplot(., aes(x = year, y = mean, color = class)) + 
+  geom_line() +
+  geom_point() + 
+  scale_x_continuous(breaks = c(1999,2008)) + 
+  scale_color_discrete(name = "Class") + 
+  labs( 
+      title = "Average City MPG by Year and Class"
+    , y     = "Average of City Miles per Gallon"
+    , x     = "Year"
+  )
+
+plot_grid(optA1, optA2, optA3, optA4, optB1, optB2, optB3, optB4, align = "hv", axis = "tblr", ncol = 2)
+
+```
+
+
+## Option 2
+
+Multiple Functions 
+
+### Overview 
+
+| Namespace Usage | PROS | CONS | 
+|:----|:--------|:--------
+| **5** <br><br>1. varnames<br>2. myfunc_data_A<br>3. myfunc_data_B<br>4. myfunc_plot_A<br>5. myfunc_plot_B | - less repeating code<br>- works ok if only have 1 situation  | - Still difficult to maintain consistency and stay organized, especially as add additional functions for new dimensions and situations <br>- have to remember to change all plots if update formatting | 
+
+*Note:* Given the simplicity of this example, it would be very easy to combine myfunc_data_A with myfunc_plot_A (and myfunc_data_B with myfunc_plot_B).
+
+```{r option1}
+# VAR NAMES DATA SET 
+varnames <- tribble(
+  ~var, ~name
+  , "manufacturer", "Manufacturer"
+  , "cyl"         , "Number of Cylinders"
+  , "drv"         , "Drive Type"
+  , "class"       , "Class"
+)
+
+
+## A Functions 
+
+data_A <- function(VARst, DF = mpg, VARDF = varnames){
+  
+  VARname <- pull(filter(VARDF, var == all_of(VARst)), name)
+  
+  toPlot <- DF %>%
+    rename(VAR = all_of(VARst)) %>% #set comment name for specific row 
+    count(VAR) %>%
+    mutate(VAR = reorder(VAR, n)) %>%
+    arrange(VAR)
+  
+  OUT <- list(var = VARst, df = toPlot, name = VARname)
+  return(OUT)
+}
+
+plot_A <- function(LIST){
+  OUT <- LIST$df %>% 
+  ggplot(., aes(x = n, y = VAR)) + 
+  geom_col() + 
+  labs( 
+      title = glue("Frequency of {LIST$name}")
+    , subtitle = "mpg data set"
+    , y     = glue("{LIST$name}")
+    , x     = "Count"
+  )
+  return(OUT)
+}
+
+
+## B Functions 
+
+data_B <- function(VARst, DF = mpg, VARDF = varnames){
+  
+  VARname <- pull(filter(VARDF, var == all_of(VARst)), name)
+  
+  toPlot <- DF %>%
+    rename(VAR = all_of(VARst)) %>% #set comment name for specific row 
+    group_by(year, VAR) %>% 
+    summarize(mean = mean(cty), .groups = "keep")
+  
+  OUT <- list(var = VARst, df = toPlot, name = VARname)
+  return(OUT)
+}
+
+plot_B <- function(LIST){
+  OUT <- LIST$df %>% 
+    ggplot(., aes(x = year, y = mean, color = as.character(VAR))) + 
+    geom_line() +
+    geom_point() + 
+    scale_x_continuous(breaks = c(1999,2008)) + 
+    scale_color_discrete(name = glue("{LIST$name}")) + 
+     labs( 
+        title = glue("Average City MPG by Year and {LIST$name}")
+      , y     = "Average of City Miles per Gallon"
+      , x     = "Year"
+    )
+  return(OUT)
+}
+
+
+plot_grid(
+    plot_A(data_A("manufacturer"))
+  , plot_A(data_A("cyl"))
+  , plot_A(data_A("drv"))
+  , plot_A(data_A("class"))
+  , plot_B(data_B("manufacturer"))
+  , plot_B(data_B("cyl"))
+  , plot_B(data_B("drv"))
+  , plot_B(data_B("class"))
+  , align = "hv", axis = "tblr", ncol = 2
+)
+
+```
+
+
+## Option 3
+
+One long function 
+
+### Overview 
+
+| Namespace Usage | PROS | CONS | 
+|:----|:--------|:--------
+| **1** <br><br>1. myfunc_AB | - only 1 name in name space<br>- all code in one place  | - more dimensions/situations added will make funciton longer and longer<br> - longer function makes it difficult to maintain and test  | 
+
+
+```{r option2}
+
+myfunc_AB <- function(VARst, PLOTOPT, DF = mpg){
+  
+  if (!toupper(PLOTOPT) %in% c("A", "B") ){
+    warning("INCORRECT PLOT OPTION, MUST BE A (FREQUENCY ) OR B (CTY MPG AVERAGE BY YEAR)")
+  } #check out the {typed} package for how to restrict input types and values https://github.com/moodymudskipper/typed
+  
+    VARDF <- tribble(
+      ~var, ~name
+      , "manufacturer", "Manufacturer"
+      , "cyl"         , "Number of Cylinders"
+      , "drv"         , "Drive Type"
+      , "class"       , "Class"
+    )
+  
+  VARname <- pull(filter(VARDF, var == all_of(VARst)), name)
+  
+  if (toupper(PLOTOPT) == "A"){
+  
+    OUT <-DF %>%
+      rename(VAR = all_of(VARst)) %>% 
+      count(VAR) %>%
+      mutate(VAR = reorder(VAR, n)) %>%
+      arrange(VAR) %>% 
+    ggplot(., aes(x = n, y = VAR)) + 
+      geom_col() + 
+      labs( 
+          title = glue("Frequency of {VARname}")
+        , subtitle = "mpg data set"
+        , y     = glue("{VARname}")
+        , x     = "Count"
+      )
+  
+  } else if (toupper(PLOTOPT) == "B"){
+  
+    OUT <- DF %>%
+      rename(VAR = all_of(VARst)) %>% 
+      group_by(year, VAR) %>% 
+      summarize(mean = mean(cty), .groups = "keep") %>% 
+    ggplot(., aes(x = year, y = mean, color = as.character(VAR))) + 
+      geom_line() +
+      geom_point() + 
+      scale_x_continuous(breaks = c(1999,2008)) + 
+      scale_color_discrete(name = glue("{VARname}")) + 
+       labs( 
+          title = glue("Average City MPG by Year and {VARname}")
+        , y     = "Average of City Miles per Gallon"
+        , x     = "Year"
+      )
+  
+  } 
+  
+  return(OUT)
+} #END myfunc_AB
+
+
+VARst <- "manufacturer"
+PLOTOPT <- "A"
+
+
+
+
+plot_grid(
+    myfunc_AB("manufacturer", "A")
+  , myfunc_AB("cyl"         , "A")
+  , myfunc_AB("drv"         , "A")
+  , myfunc_AB("class"       , "A")
+  , myfunc_AB("manufacturer", "B")
+  , myfunc_AB("cyl"         , "B")
+  , myfunc_AB("drv"         , "B")
+  , myfunc_AB("class"       , "B")
+  , align = "hv", axis = "tblr", ncol = 2
+)
+
+```
+
+
+## old
+
+```{r, eval = FALSE }
+
+
+
+g_c <- mpg %>% 
+   group_by(year) %>%
+   count(drv)  %>% 
+   arrange(drv, year) %>% 
+  ggplot(., aes(x = year, y = n, fill = drv, color = drv)) + 
+   geom_line(size = 1, alpha = 0.8) + 
+   geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5, fill = alpha("white", 0))+ 
+   geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5)+ 
+   scale_x_continuous(breaks = c(1999, 2008)) +
+   guides( 
+      fill  = guide_legend(title = "Drive Type")
+    , color = guide_legend(title = "Drive Type")
+  ) +
+  labs(
+      title = "Count of Drive Type by Year of Manufacturing"
+    , y     = "Count of Drive Type"
+    , x     = "Year of Manufacturing"
+  ) 
+
+g_m <- mpg %>% 
+  group_by(year, drv) %>%
+  summarise(mean = mean(hwy), .groups = "keep") %>% 
+ggplot(., aes(x = year, y = mean, fill = drv, color = drv)) + 
+  geom_line(size = 1, alpha = 0.8) + 
+  geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5, fill = alpha("white", 0))+ 
+  geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5)+ 
+  scale_x_continuous(breaks = c(1999, 2008)) + 
+  guides( 
+      fill  = guide_legend(title = "Drive Type")
+    , color = guide_legend(title = "Drive Type")
+  ) + 
+  labs(
+      title = "Average Highway MPG by Drive Type and Year of Manufacturing"
+    , y     = "Highway Miles per Gallon"
+    , x     = "Year of Manufacturing"
+  ) 
+
+```
+
+
+Write a function that can be used for multiple plots.  
+
+```{r create-functions , eval= FALSE }
+
+
+
+PLOT_CNT <- function(VAR_y,   VAR_x = "year"){
+  
+toPlot <- mpg %>% 
+    rename(var_y = all_of(VAR_y), var_x = all_of(VAR_x)) %>% 
+    group_by(var_x) %>%
+    count(var_y)  %>% 
+    mutate(var_y = as.character(var_y)) #for numeric cyl variable 
+  
+  vname_y <- filter(varnames, var == VAR_y)$name
+  vname_x <- filter(varnames, var == VAR_x)$name
+  
+  ggplot(toPlot, aes(x = var_x, y = n, fill = var_y, color = var_y)) + 
+    geom_line(size = 1, alpha = 0.8) + 
+    geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5, fill = alpha("white", 0))+ 
+    geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5)+ 
+    scale_x_continuous(breaks = c(1999, 2008)) + 
+    guides(fill  = guide_legend(title = vname_y), color = guide_legend(title = vname_y)) +
+    labs(
+        title = str_wrap(glue("Count of {vname_y} by {vname_x}"), 40)
+      , y     = glue("Count of {vname_y}")
+      , x     = glue("{vname_x}")
+    ) 
+  
+}
+
+
+PLOT_MEAN <- function(VAR_c, VAR_y, VAR_x = "year"){
+  
+toPlot <-mpg %>% 
+    select(var_y = all_of(VAR_y), var_x = all_of(VAR_x), var_c = all_of(VAR_c)) %>% 
+    mutate(var_c = as.character(var_c)) %>% #requried becasue cyl is numeric
+    group_by(var_x, var_c) %>%
+    summarise(mean = mean(var_y), .groups = "keep") 
+  
+  vname_c <- filter(varnames, var == VAR_c)$name
+  vname_y <- filter(varnames, var == VAR_y)$name
+  vname_x <- filter(varnames, var == VAR_x)$name
+  
+  ggplot(toPlot, aes(x = var_x, y = mean, fill = var_c, color = var_c)) + 
+    geom_line(size = 1, alpha = 0.8) + 
+    geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5, fill = alpha("white", 0))+ 
+    geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5)+ 
+    scale_x_continuous(breaks = c(1999, 2008)) + 
+    guides( 
+        fill  = guide_legend(title = vname_c)
+      , color = guide_legend(title = vname_c)
+    ) +
+    labs(
+        title = str_wrap(glue("Mean {vname_y} by {vname_x} and {vname_c}"), 40)
+      , y     = glue("Mean {vname_y}")
+      , x     = glue("{vname_x}")
+    ) 
+  
+}
+
+COMBINE_PLOTS <- function(VAR1_CHAR, VAR2_NUM){
+  
+  g1 <- PLOT_CNT(VAR_y = VAR1_CHAR)
+  g2 <- PLOT_MEAN(VAR_y = VAR2_NUM, VAR_c = VAR1_CHAR)
+  
+  grid.arrange(g1, g2, nrow = 1)
+}
+
+```
+
+```{r, eval = FALSE }
+COMBINE_PLOTS(VAR1_CHAR = "drv"  , VAR2_NUM = "hwy")
+COMBINE_PLOTS(VAR1_CHAR = "class", VAR2_NUM = "hwy")
+COMBINE_PLOTS(VAR1_CHAR = "cyl"  , VAR2_NUM = "hwy")
+```
+
