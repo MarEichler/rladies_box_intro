@@ -20,7 +20,6 @@ a {
 
 
 img.myimg {
-  width: 75%;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -48,17 +47,32 @@ img.myimg {
 
 
 
-table.mytable {
-  font-size: 0.95em;
+/* table */ 
+
+
+table.mytable td {
+  text-align: center; 
   vertical-align: top;
+  font-size: 0.65em;
 }
 
-table.mytable td, table.mytable th {
+table.mytable th {
+  font-size: 0.85em !important;
+}
+
+table.mytable td.fst {
+  text-align: left !important;
+  font-weight: bold; 
+  font-size: 0.85em !important;
+}
+
+table.mytable td, th {
   border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
+   border-collapse: collapse;
+  padding: 5px;
 }
 
-table.mytable tr:nth-child(even) {
-  background-color: #e9e9e9;
+img.myemoji {
+  height: 30px;
+  padding-bottom: 2px;
 }

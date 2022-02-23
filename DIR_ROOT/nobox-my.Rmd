@@ -26,24 +26,16 @@ library(cowplot)
 knitr::opts_chunk$set(fig.width = 12, fig.height = 12)
 ```
 
-
-**Idea:** Want to show multiple plots for two different situations   
+**Goal:** 
 
 A. Frequency of cars by `manufacturer`, `cyl`, `drv` and `class`   
-B. Average of `cty`  by year and `manufacturer`, `cyl`, `drv` and `class` 
+B. Slope plot of average of `cty` for years 1999 and 2008 by `manufacturer`, `cyl`, `drv` and `class` 
 
 # {.tabset}
 
 ## Option 1
 
-Write out code.  
-
-### Overview 
-
-| Namespace Usage | PROS | CONS | 
-|:----|:--------|:--------
-| **8** <br><br>1. optA1<br>2. optA2<br>3. optA3<br>4. optA4<br>5. optB1<br>6. optB2<br>7. optB3<br>8. optA4 | - Quick and easy<br>- OK if only have **1** plot output (no repeating code) | - If have more than one plot, difficult to maintain consistency and stay organized<br>- have to remember to change all plots if update formatting | 
-
+### Write Out Code  
 
 
 ```{r option0}
@@ -167,15 +159,8 @@ plot_grid(optA1, optA2, optA3, optA4, optB1, optB2, optB3, optB4, align = "hv", 
 
 ## Option 2
 
-Multiple Functions 
+### Multiple Functions 
 
-### Overview 
-
-| Namespace Usage | PROS | CONS | 
-|:----|:--------|:--------
-| **5** <br><br>1. varnames<br>2. myfunc_data_A<br>3. myfunc_data_B<br>4. myfunc_plot_A<br>5. myfunc_plot_B | - less repeating code<br>- works ok if only have 1 situation  | - Still difficult to maintain consistency and stay organized, especially as add additional functions for new dimensions and situations <br>- have to remember to change all plots if update formatting | 
-
-*Note:* Given the simplicity of this example, it would be very easy to combine myfunc_data_A with myfunc_plot_A (and myfunc_data_B with myfunc_plot_B).
 
 ```{r option1}
 # VAR NAMES DATA SET 
@@ -266,13 +251,7 @@ plot_grid(
 
 ## Option 3
 
-One long function 
-
-### Overview 
-
-| Namespace Usage | PROS | CONS | 
-|:----|:--------|:--------
-| **1** <br><br>1. myfunc_AB | - only 1 name in name space<br>- all code in one place  | - more dimensions/situations added will make funciton longer and longer<br> - longer function makes it difficult to maintain and test  | 
+### One Long Function
 
 
 ```{r option2}
@@ -350,129 +329,5 @@ plot_grid(
   , align = "hv", axis = "tblr", ncol = 2
 )
 
-```
-
-
-## old
-
-```{r, eval = FALSE }
-
-
-
-g_c <- mpg %>% 
-   group_by(year) %>%
-   count(drv)  %>% 
-   arrange(drv, year) %>% 
-  ggplot(., aes(x = year, y = n, fill = drv, color = drv)) + 
-   geom_line(size = 1, alpha = 0.8) + 
-   geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5, fill = alpha("white", 0))+ 
-   geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5)+ 
-   scale_x_continuous(breaks = c(1999, 2008)) +
-   guides( 
-      fill  = guide_legend(title = "Drive Type")
-    , color = guide_legend(title = "Drive Type")
-  ) +
-  labs(
-      title = "Count of Drive Type by Year of Manufacturing"
-    , y     = "Count of Drive Type"
-    , x     = "Year of Manufacturing"
-  ) 
-
-g_m <- mpg %>% 
-  group_by(year, drv) %>%
-  summarise(mean = mean(hwy), .groups = "keep") %>% 
-ggplot(., aes(x = year, y = mean, fill = drv, color = drv)) + 
-  geom_line(size = 1, alpha = 0.8) + 
-  geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5, fill = alpha("white", 0))+ 
-  geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5)+ 
-  scale_x_continuous(breaks = c(1999, 2008)) + 
-  guides( 
-      fill  = guide_legend(title = "Drive Type")
-    , color = guide_legend(title = "Drive Type")
-  ) + 
-  labs(
-      title = "Average Highway MPG by Drive Type and Year of Manufacturing"
-    , y     = "Highway Miles per Gallon"
-    , x     = "Year of Manufacturing"
-  ) 
-
-```
-
-
-Write a function that can be used for multiple plots.  
-
-```{r create-functions , eval= FALSE }
-
-
-
-PLOT_CNT <- function(VAR_y,   VAR_x = "year"){
-  
-toPlot <- mpg %>% 
-    rename(var_y = all_of(VAR_y), var_x = all_of(VAR_x)) %>% 
-    group_by(var_x) %>%
-    count(var_y)  %>% 
-    mutate(var_y = as.character(var_y)) #for numeric cyl variable 
-  
-  vname_y <- filter(varnames, var == VAR_y)$name
-  vname_x <- filter(varnames, var == VAR_x)$name
-  
-  ggplot(toPlot, aes(x = var_x, y = n, fill = var_y, color = var_y)) + 
-    geom_line(size = 1, alpha = 0.8) + 
-    geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5, fill = alpha("white", 0))+ 
-    geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5)+ 
-    scale_x_continuous(breaks = c(1999, 2008)) + 
-    guides(fill  = guide_legend(title = vname_y), color = guide_legend(title = vname_y)) +
-    labs(
-        title = str_wrap(glue("Count of {vname_y} by {vname_x}"), 40)
-      , y     = glue("Count of {vname_y}")
-      , x     = glue("{vname_x}")
-    ) 
-  
-}
-
-
-PLOT_MEAN <- function(VAR_c, VAR_y, VAR_x = "year"){
-  
-toPlot <-mpg %>% 
-    select(var_y = all_of(VAR_y), var_x = all_of(VAR_x), var_c = all_of(VAR_c)) %>% 
-    mutate(var_c = as.character(var_c)) %>% #requried becasue cyl is numeric
-    group_by(var_x, var_c) %>%
-    summarise(mean = mean(var_y), .groups = "keep") 
-  
-  vname_c <- filter(varnames, var == VAR_c)$name
-  vname_y <- filter(varnames, var == VAR_y)$name
-  vname_x <- filter(varnames, var == VAR_x)$name
-  
-  ggplot(toPlot, aes(x = var_x, y = mean, fill = var_c, color = var_c)) + 
-    geom_line(size = 1, alpha = 0.8) + 
-    geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5, fill = alpha("white", 0))+ 
-    geom_point(shape = 21, size = 3, alpha = 0.5, stroke = 1.5)+ 
-    scale_x_continuous(breaks = c(1999, 2008)) + 
-    guides( 
-        fill  = guide_legend(title = vname_c)
-      , color = guide_legend(title = vname_c)
-    ) +
-    labs(
-        title = str_wrap(glue("Mean {vname_y} by {vname_x} and {vname_c}"), 40)
-      , y     = glue("Mean {vname_y}")
-      , x     = glue("{vname_x}")
-    ) 
-  
-}
-
-COMBINE_PLOTS <- function(VAR1_CHAR, VAR2_NUM){
-  
-  g1 <- PLOT_CNT(VAR_y = VAR1_CHAR)
-  g2 <- PLOT_MEAN(VAR_y = VAR2_NUM, VAR_c = VAR1_CHAR)
-  
-  grid.arrange(g1, g2, nrow = 1)
-}
-
-```
-
-```{r, eval = FALSE }
-COMBINE_PLOTS(VAR1_CHAR = "drv"  , VAR2_NUM = "hwy")
-COMBINE_PLOTS(VAR1_CHAR = "class", VAR2_NUM = "hwy")
-COMBINE_PLOTS(VAR1_CHAR = "cyl"  , VAR2_NUM = "hwy")
 ```
 

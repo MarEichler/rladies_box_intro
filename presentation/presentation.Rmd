@@ -12,13 +12,13 @@ output:
 
 # TEST 
 
-```{r}
-print("x")
-```
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;x&quot;</span>)</span></code></pre></div>
-<pre><code>## [1] &quot;x&quot;</code></pre>
+
+
+# TEST2
+
+
 
 
 
@@ -47,7 +47,7 @@ Introduce the `{box}` package and show how it can be used to write modularized/o
 - Clean-up/Manage name space 
 - Modular-ize code without having to write full package 
   * purposeful and organized code 
-  * if change codde within box module, importation of box module doesn't change 
+  * if change code within box module, importation of box module doesn't change 
 
 Box modules are like mini-packages: help re-use or share code without the much larger hurdle of developing a whole R package 
 
@@ -91,26 +91,27 @@ Box modules are like mini-packages: help re-use or share code without the much l
 
 <small>*Note:* this is a simplified version of the example in the `DIR_ROOT` folder of the repository, using `mpg` data from the `{ggplot2}`</small>  
 
-<div id = "contentbox", style = "width: 80%; display: block; margin-left: auto; margin-right: auto;">
+<div id = "contentbox", style = "width: 90%; display: block; margin-left: auto; margin-right: auto;">
   <div id="column1" style="float:left; width:49%;">
     <center><b>A: Frequency Bar Plot</b><br>Character or Discrete Numeric Variables</center>
-    <img style = "width: 90%;" src="img/A_plot_table.png" alt="Goal A: Table Plot">  
+    <img class = "myimg" style = "width: 80%;" src="img/A_plot_table.png" alt="Goal A: Table Plot">  
   </div>
   <div id="column2" style="float:right; width:49%;">
     <center><b>B: Slope Plot</b><br>Mean of Continuous Numeric Variable at Two Points</center>
-    <img style = "width: 90%;" src="img/B_plot_slope.png" alt="Goal B: Slope Plot">  
+    <img class = "myimg" style = "width: 80%;" src="img/B_plot_slope.png" alt="Goal B: Slope Plot">  
   </div>
 </div>
 <br> 
 
 
 
-# Option 1: Write out code for each plot 
+# Option 1: Write Out Code 
 
-<img class="myimg" src="img/opt1.PNG" alt="Option 2 - Multiple functions"> 
+<img class="myimg" width="70%" src="img/opt1.PNG" alt="Option 1 - Write Out all Code for each plot"> 
 
+Create plots with different variables &#8658; more code (write or copy/paste)
 
-More situations/dimensions: 
+More situations/dimensions &#8658; additional unstructured code: 
 
 - more mess and less organization 
 - more name space usage 
@@ -118,7 +119,9 @@ More situations/dimensions:
 
 # Option 2: Multiple Functions 
 
-<img class="myimg" src="img/opt2.PNG" alt="Option 2 - Multiple functions"> 
+<img class="myimg" width="70%" src="img/opt2.PNG" alt="Option 2 - Multiple functions"> 
+
+Create plots with different variables &#8658; can easily use function
 
 More situations/dimensions &#8658; more functions: 
 
@@ -129,7 +132,9 @@ More situations/dimensions &#8658; more functions:
 
 # Option 3: One Long Function 
 
-<img class="myimg" src="img/opt3.PNG" alt="Option 3 - one long functions"> 
+<img class="myimg" width="70%" src="img/opt3.PNG" alt="Option 3 - one long functions"> 
+
+Create plots with different variables &#8658; can easily use functions 
 
 More situations/dimensions &#8658; Longer function
 
@@ -137,32 +142,128 @@ More situations/dimensions &#8658; Longer function
 - difficult to test (one part of the function breaks, entire function won't work) 
 
 
-# Option 4: &#127775; Using Box Modules &#127775;
-
-## Create Box Modules (`.R` files )
-
-<img class="myimg" style="padding-bottom:10px;" src="img/opt4_1.PNG" alt="Option 4 - box modules"> 
-
-## Use in `.Rmd` or `.R` files  
-
-<img class="myimg" src="img/opt4_2.PNG" alt="Option 4 - usage"> 
-
-- only box modules are in the name space
-- can use any **exported** functions (using the `'# @export`)
+# Option 4: &#127775; Box Modules &#127775;
 
 
-**More situations/dimensions &#8658; add/amend box modules**
+<img class="myimg" width = "85%" src="img/opt4.PNG" alt="Option 4 - box modules"> 
 
-- Self-contained code in box module 
-- Refer to other box modules within a specific modules 
-- Test within a specific box module 
-- Break up long functions into multiple functions but only export the final function 
-- Much smaller usage of name space 
-- Easier to share with internally/externally 
+<div id = "contentbox", style = "width: 100%; display: block; margin-left: auto; margin-right: auto;">
+  <div id="column1" style="float:left; width:40%;">
+    <ul>
+      <li>Only box modules are in the name space</li>
+      <li>Can use any <b>exported</b> functions 
+      <li>Refer to other box modules within a specific modules</li>
+    </ul>
+    Create plots with different variables &#8658; use functions from modules 
+  </div>
+  <div id="column2" style="float:right; width:58%;">
+    More situations/dimensions &#8658; add/amend box modules
+    <ul>
+      <li>Test within a specific box module</li>
+      <li>Break up long functions into multiple functions but only export the final function</li>
+      <li>Much smaller usage of name space</li>
+      <li>Easier to share with internally/externally </li>
+    </ul>
+  </div>
+</div>
 
 
+# Comparison  
 
-# Box: Structure 
+<table class = "mytable">
+  <tr>
+    <th style="width:12%">Item</th>
+    <th style="width:22%">Option 1<br>Write Out Code</th>
+    <th style="width:22%">Option 2<br>Multiple Functions</th>
+    <th style="width:22%">Option 3<br>One Long Function</th>
+    <th style="width:22%">Option 4<br>Box Modules</th>
+  </tr>
+  <tr>
+    <td class = "fst">Namespace Usage</td>
+    <td> 
+      <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
+      Constantly have to create unique names for objects
+    </td>
+    <td> 
+      <img class="myemoji" src="img/yellow_meh.svg" alt="Yellow Meh"><br>
+      Only use name space for specific functions and/or dependencies 
+    </td>
+    <td> 
+      <img class="myemoji" src="img/green_smile.svg" alt="Green Smile"><br>
+      Only use name space for specific function 
+    </td>
+    <td> 
+      <img class="myemoji" src="img/green_smile.svg" alt="Green Smile"><br>
+      Only use name space for box modules 
+    </td>
+  </tr>
+  <tr>
+    <td class = "fst">Testing Code</td>
+    <td> 
+      <img class="myemoji" src="img/yellow_meh.svg" alt="Yellow Meh"><br>
+      Testing code as written but shouldn’t repeat code multiple times 
+    </td>
+    <td> 
+      <img class="myemoji" src="img/green_smile.svg" alt="Green Smile"><br>
+      Functions are sectioned so can test at each level 
+    </td>
+    <td> 
+      <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
+      Difficult to test individual sections once function get extremely long 
+    </td>
+    <td> 
+      <img class="myemoji" src="img/green_smile.svg" alt="Green Smile"><br>
+      All testing can be done within the module 
+    </td>
+  </tr>
+  <tr>
+    <td class = "fst">Share/Re-Use</td>
+    <td> 
+      <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
+      Have to piece through which code to keep and then amend to new program
+    </td>
+    <td> 
+      <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
+      Put functions together and document dependencies 
+    </td>
+    <td> 
+      <img class="myemoji" src="img/yellow_meh.svg" alt="Yellow Meh"><br>
+      One function but may be challenging to amend to a different situation or different machine
+    </td>
+    <td> 
+      <img class="myemoji" src="img/green_smile.svg" alt="Green Smile"><br>
+      Just send the box modules <code>.R</code> files 
+    </td>
+  </tr>
+  <tr>
+    <td class = "fst">Additional Dimensions</td>
+    <td>
+      <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
+      New code either added to existing code or new section, bad practice if will use multiple times 
+    </td>
+    <td>
+      <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
+      Manageable to difficult depending on how much each of the functions and their dependencies need to change 
+    </td>
+    <td>
+      <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
+      Difficult given that the function is so large, adding a new dimension would be challenging 
+    </td>
+    <td>
+      <img class="myemoji" src="img/green_smile.svg" alt="Green Smile"><br>
+      Adjust easily within the box module or create a new box module (depending on situation) 
+    </td>
+  </tr>
+
+</table>
+
+
+# Okay, now what? 
+
+<br><br><br>
+<center>Let's Learn how to use <code>{box}</code><center>
+
+# Box: File/Folder Structure 
 
 - Box modules are simply `.R` files with specific instructions
 - Best to put all modules into a folder to keep organized 
@@ -173,23 +274,23 @@ How I structure my folders:
 <div style="font-family: monospace; background-color: #E9E9E9;">
 DIR_ROOT  
 |  
-|---myboxes #folder can have any name  
+|---myboxes <i>#folder can have any name</i>   
 |   |  
 |   |---Abox.R   
 |   |---Bbox.R  
 |   
-|---my.Rmd  #main RMD file that will generate report/html
+|---my.Rmd  <i>#main RMD file that will generate report/html</i>  
 </div>
 
 - how you call box modules will depend on the structure of folders 
 - similar to including images or sourcing (`source(file.R)`)
 
 
-# Box: Packages
+# Box: External Packages
 
 - when starting your box module will need to use package (e.g. `{ggplot2}`, `{dplyr}`, etc.)
-- Usualy load packages using `library()` command 
-- **!! NEED TO CALL PACKAGES/FUNCTIONS USING `box::use()`, NOT `library()` !!**
+- Usually load packages using `library()` command 
+- Need to load packages and functions with `box::use()`, NOT `library()`
 
 <div class = "quote">
 `box::use` is a **universal import declaration**. It works for packages just as well as for modules. In fact, ‘box’ completely replaces the base R `library` and `require` functions. `box::use` is more explicit, more flexible, and less error-prone than `library`. At its simplest, it provides a direct replacement
@@ -199,29 +300,43 @@ DIR_ROOT
 
 # Box: `box::use()` 
 
-Common Box Declarations (with `{dplyr}` as example)
+### To Use Box Module 
 
-<div id = "contentbox2", style = "width: 90%; display: block; margin-left: auto; margin-right: auto; line-height: 150%;">
-  <div id="column1" style="float:left; width:48%;">
+`box::use( myboxes/Abox)` 
+
+- `myboxes`: folder where box module file is located 
+- `Abox`: name of box module to load (*without* the `.R` extension)
+
+
+### To Use Packages 
+
+<div id = "contentbox2", style = "width: 100%;">
+  <div id="column1" style="float:left; width:49%;">
     <center>
       <code>box::use(</code>
       <code><b>dplyr[...]</b></code>
       <code>)</code></b></center><br>
-    - Imports <code>{dplyr}</code> and attached all exported names<br>
-    - Similar to <code>library(dplyr)</code><br>
-    - Use any <code>{dplyr}</code> functions without specifying the package name
+    <ul>
+      <li>Imports <code>{dplyr}</code> and attached all exported names</li>
+      <li>Similar to <code>library(dplyr)</code></li>
+      <li>Use any <code>{dplyr}</code> functions without specifying the package name</li>
+    </ul>
   </div>
-  <div id="column2" style="float:right; width:48%;">
+  <div id="column2" style="float:right; width:49%;">
     <center>
       <code>box::use(</code>
       <code><b>dplyr[filter, select]</b></code>
       <code>)</code></b></center><br>
-    - Imports  <code>{dplyr}</code> and attaches the names <code>dplyr::filter</code> and <code>dplyr::select</code><br>
-    - Use <code>filter()</code> and <code>select()</code> from <code>{dplyr}</code><br>
-    - Would not be able to use <code>mutate()</code><br> 
-    - Could use <code>dplyr::mutate()</code> to use 
+    <ul>
+      <li>Imports  <code>{dplyr}</code> and attaches the names <code>dplyr::filter</code> and <code>dplyr::select</code></li>
+      <li>Use <code>filter()</code> and <code>select()</code> from <code>{dplyr}</code></li>
+      <li>Would not be able to use <code>mutate()</code></li>
+      <li>Could use <code>dplyr::mutate()</code> to use </li>
+    </ul>
   </div>
 </div>
+
+
 
 
 # Box: Write Your Functions/Code (boring text info)   
@@ -240,6 +355,21 @@ Common Box Declarations (with `{dplyr}` as example)
   * Windows/Linux: Ctrl+Shift+Alt+R
   * Mac: Option+Shift+Command+R
   * Roxygen is a way to document code, it's used in the development of R packages
+  
+**Roxygen Skeleton**
+  
+```{r, eval = FALSE}
+#' Title
+#'
+#' @param 
+#'
+#' @return
+#' @export
+#'
+#' @examples
+
+```
+
 
 # Box: Write Your Functions/Code (simple example)
 
@@ -248,11 +378,26 @@ Common Box Declarations (with `{dplyr}` as example)
 ```{r, eval = FALSE}
 #following code is saved in box/text.R file 
 
+box::use(
+    glue[glue]
+  , stringr[str_to_lower, str_to_title]
+)
+
+greeting <- "Hello" #not exported so can be used WITHIN box module but NOT EXTERNALLY 
+
+#' Greet Someone when Given a Name  
+#' @param name A character string 
+#' @return Greeting wtih input name  
+#' @export 
+#' @examples 
+#' say_hello("Martha")
+say_hello <- function(name){
+  to_use <- str_to_title(str_to_lower(name))
+  glue("{greeting}, {to_use}")
+}
 ```
 
-## Import Box Module 
-
-`box/test` 
+## Import Box Module for Use
 
 - `box`: name of folder where `test.R` box module is located 
 - `test`: name *without extenstion* of box module 
@@ -266,9 +411,7 @@ box::use(
 
 ## Use Functions! 
 
-- with CRAN packages use double colon `::` to call a function from a specific package
-- with modules use `$` 
-
+with CRAN packages use double colon `::` to call a function from a specific package, with modules use `$` 
 
 ```{r}
 test$say_hello("Martha")
