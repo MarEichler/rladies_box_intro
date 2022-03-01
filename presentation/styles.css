@@ -1,23 +1,57 @@
 
+:root {
+  --darkblue: #495374; /* dark blue, same color scheme as box logo */ 
+  --liteblue: #D1D5E6; /* light blue, same color scheme as box logo */ 
+  --verylite: #EAEFF6; 
+  --darkgrey: #383838; /* rgb(56, 56, 56) */ 
+  --litegrey: #F7F8F8; /* #e4e5e7 */ 
+}
 
 
 h1 {
 font-weight: bold; 
-color: navy !important; 
+color: var(--darkblue) !important; 
 }
 
-/*
-code {
-  font-weight: bold;
-  color: red;
-} 
-*/ 
+body {
+  font-family: Ubuntu;   
+  color: var(--darkbrey);
+  font-size: 24px !important; /* default is ~24px */ 
+}
 
+
+code {
+  font-family: Ubuntu Mono
+} 
+ 
+div.mycodeblock {
+  font-family: Ubuntu Mono;
+  font-weight: bold;
+  font-size: 0.65em; 
+  background-color: var(--verylite); 
+  border: 1px solid var(--darkblue);
+  line-height: 1.25;
+  text-decoration: inherit;
+  margin: 1em 0; 
+}
+
+div.outputcode {
+  font-family: Ubuntu Mono;
+  font-weight: bold;
+  font-size: 0.80em; 
+  border: 1px solid var(--darkblue);
+  line-height: 60%;
+  margin-left: 20px;
+  margin-top: 15px;
+}
 
 a {
-  color: blue !important; 
+  color: var(--darkblue) !important; 
 }
 
+a:hover {
+  background-color: var(--liteblue);
+}
 
 img.myimg {
   display: block;
@@ -32,8 +66,9 @@ img.myimg {
   margin-left: auto;
   margin-right: auto;
   font-size: 1.25em;
-  font-family: serif;
-  line-height: 125%;
+  line-height: 155%;
+  font-family: Ubuntu Light;
+  
 }
 
 .quotesource{
@@ -42,33 +77,70 @@ img.myimg {
   margin-left: 12.5%;
   margin-right: 12.5%;
   text-align: right; 
-  font-style: italic;
+}
+
+.colheader {
+  text-align: center;
+  font-weight: bold;
+  background-color: var(--liteblue);
+  font-size: 1.7em;
+  line-height: 1.5;
+  margin-bottom: 15px;
 }
 
 
+.mycolumn {
+  float:left; 
+  width:31.5%; 
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* change code chunk colors */ 
+
+code span.co {color: #707070;} /* grey */ 
+code span.ot {color: var(--darkgrey);} 
+code span.st {color: #008514;} /* green */ 
+code span.cf {color: #A85D00;} /* orange */ 
+code span.var{color: #A88400;}
+code span.sc {color: var(--darkgrey); }  
+code span.fu {color: #0736F2; } /* bright blue */ 
+
+pre.sourceCode {
+background-color: var(--litegrey); 
+color: var(--darkgrey); 
+}
+
+pre {
+border-color: var(--darkblue); 
+background-color: white; 
+color: var(--darkblue); 
+}
 
 /* table */ 
 
+table.mytable {
+  border-collapse: collapse;
+}
 
 table.mytable td {
   text-align: center; 
   vertical-align: top;
-  font-size: 0.65em;
+  font-size: 0.7em;
 }
 
 table.mytable th {
-  font-size: 0.85em !important;
+  font-size: 0.9em !important;
 }
 
 table.mytable td.fst {
   text-align: left !important;
   font-weight: bold; 
-  font-size: 0.85em !important;
+  font-size: 0.9em !important;
 }
 
 table.mytable td, th {
-  border: 1px solid #dddddd;
-   border-collapse: collapse;
+  border: 2px solid #585858;
   padding: 5px;
 }
 

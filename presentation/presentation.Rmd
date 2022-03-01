@@ -10,18 +10,6 @@ output:
 
 ---
 
-# TEST 
-
-
-
-
-
-# TEST2
-
-
-
-
-
 # Goal of this talk
 
 Introduce the `{box}` package and show how it can be used to write modularized/organized code and manage the name space.  
@@ -30,19 +18,28 @@ Introduce the `{box}` package and show how it can be used to write modularized/o
 
 ### Packages Used in the Making of this Presentation
 
-- `{box}`
-- `{glue}`
-- `{tidyverse}` specifically `{ggplot2}`, `{dplyr}`, `{stringr}`, and `{tidyr}`
+- [`{box}`](https://klmr.me/box/)
+- [`{glue}`](https://glue.tidyverse.org/): used to combine strings and R code (similar to `paste/paste0`)
+- [`{tidyverse}`](https://www.tidyverse.org/) specifically `{ggplot2}`, `{dplyr}`, `{stringr}`, and `{tidyr}`
 
 
 # `{box}` 
 
-- `{box}` is a relatively new package 
-- first version released on GitHub is [0.9.8](https://github.com/klmr/box/releases/tag/version-0.9.8) in July 2017
-- first version available on CRAN is [1.0.0](https://cran.r-project.org/src/contrib/Archive/box/) in February 2021
-- Current version [1.1.0](https://cloud.r-project.org/web/packages/box/index.html) released in September 2021
+<div id="column1" style="float:left; width:15%;">
+  <img style = "width: 100%; margin-top: -20px;" src="img/box-logo.png" alt="box package logo">  
+</div>
+<div id="column2" style="float:left; width:60%;">
+  <ul>
+    <li><a href = "https://klmr.me/box/" target = "_blank"><code>{box}</code></a> is a relatively new package</li>
+    <li>first version released on GitHub in July 2017</li>
+    <li>first version on CRAN in February 2021</li>
+    <li>Current version <a href="https://cloud.r-project.org/web/packages/box/index.html" target = "_blank">1.1.0</a> released in September 2021
+  </ul>
+</div>
 
-# Why? 
+
+
+# Why use `{box}`? 
 
 - Clean-up/Manage name space 
 - Modular-ize code without having to write full package 
@@ -56,7 +53,7 @@ Box modules are like mini-packages: help re-use or share code without the much l
 - share externally
 
 
-# Name Space
+# Why use `{box}`: Name Space
 
 <div id = "contentbox", style = "width: 100%; display: block; margin-left: auto; margin-right: auto;">
   <div id="column1" style="float:left; width:40%;">
@@ -74,10 +71,10 @@ Box modules are like mini-packages: help re-use or share code without the much l
   </div>
 </div>
 
-# Modular-ize 
+# Why use `{box}`: Modular-ize 
 
 - put code in to 'modules' or sections
-- can have each module for a specific situation or group fo functions
+- can have each module for a specific situation or group of functions
 - other coding languages used in data science have this capability as well 
   * C++ with namespace 
   * Python with modules/packages
@@ -86,8 +83,8 @@ Box modules are like mini-packages: help re-use or share code without the much l
 # Quick Example: Different Ways of Coding 
 
 - data set with both character and numeric variables 
-- want to create multiple plots 
 - two types of plots  
+- want to create 2 of each type of plot using different variables 
 
 <small>*Note:* this is a simplified version of the example in the `DIR_ROOT` folder of the repository, using `mpg` data from the `{ggplot2}`</small>  
 
@@ -121,7 +118,7 @@ More situations/dimensions &#8658; additional unstructured code:
 
 <img class="myimg" width="70%" src="img/opt2.PNG" alt="Option 2 - Multiple functions"> 
 
-Create plots with different variables &#8658; can easily use function
+Create plots with different variables &#8658; can easily use functions
 
 More situations/dimensions &#8658; more functions: 
 
@@ -134,7 +131,7 @@ More situations/dimensions &#8658; more functions:
 
 <img class="myimg" width="70%" src="img/opt3.PNG" alt="Option 3 - one long functions"> 
 
-Create plots with different variables &#8658; can easily use functions 
+Create plots with different variables &#8658; can easily use function 
 
 More situations/dimensions &#8658; Longer function
 
@@ -258,10 +255,10 @@ More situations/dimensions &#8658; Longer function
 </table>
 
 
-# Okay, now what? 
+# 
 
-<br><br><br>
-<center>Let's Learn how to use <code>{box}</code><center>
+<br><br><br><br><br><br>
+<center style="font-size: 2.5em; font-weight: bold;">Let's Learn how to use <code>{box}</code><center>
 
 # Box: File/Folder Structure 
 
@@ -269,9 +266,9 @@ More situations/dimensions &#8658; Longer function
 - Best to put all modules into a folder to keep organized 
 - Folder can be named anything (I often see 'box' or 'modules')
 
-How I structure my folders: 
+Example folder structure: 
 
-<div style="font-family: monospace; background-color: #E9E9E9;">
+<div style="font-family: Ubuntu Mono; font-size: 0.90em; background-color: var(--liteblue); width: 60%;">
 DIR_ROOT  
 |  
 |---myboxes <i>#folder can have any name</i>   
@@ -312,7 +309,7 @@ DIR_ROOT
 
 <div id = "contentbox2", style = "width: 100%;">
   <div id="column1" style="float:left; width:49%;">
-    <center>
+    <center style = "background-color: var(--liteblue);">
       <code>box::use(</code>
       <code><b>dplyr[...]</b></code>
       <code>)</code></b></center><br>
@@ -320,18 +317,19 @@ DIR_ROOT
       <li>Imports <code>{dplyr}</code> and attached all exported names</li>
       <li>Similar to <code>library(dplyr)</code></li>
       <li>Use any <code>{dplyr}</code> functions without specifying the package name</li>
+      <li>If just use <code>box::use(dplyr)</code>, would not be able to use functions without calling package (i.e. <code>dplyr::filter</code>)
     </ul>
   </div>
   <div id="column2" style="float:right; width:49%;">
-    <center>
+    <center style = "background-color: var(--liteblue);">
       <code>box::use(</code>
       <code><b>dplyr[filter, select]</b></code>
       <code>)</code></b></center><br>
     <ul>
       <li>Imports  <code>{dplyr}</code> and attaches the names <code>dplyr::filter</code> and <code>dplyr::select</code></li>
       <li>Use <code>filter()</code> and <code>select()</code> from <code>{dplyr}</code></li>
-      <li>Would not be able to use <code>mutate()</code></li>
-      <li>Could use <code>dplyr::mutate()</code> to use </li>
+      <li>Would <b>not</b> be able to use <code>mutate()</code></li>
+      <li>Could use <code>dplyr::mutate()</code></li>
     </ul>
   </div>
 </div>
@@ -343,7 +341,7 @@ DIR_ROOT
 
 - can use anything in the box modules as dependencies for functions 
 - only need to export the final functions you want to use outside of the module 
-   * in order to export need to use `'# @export` 
+   * in order to export need to use `#' @export` 
 - Use [Roxygen](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html): 
    * `#'` before each line with information on function 
    * `@param` details out the variable inputs (each input has own line) 
@@ -371,51 +369,62 @@ DIR_ROOT
 ```
 
 
-# Box: Write Your Functions/Code (simple example)
+# Box: Write Your Functions/Code 
 
-## Write Code 
+<div id="column1" class = "mycolumn"> 
 
-```{r, eval = FALSE}
-#following code is saved in box/text.R file 
+  <div class = "colheader">Write Code</div>
+  
+  <div style="height: 2em;">
+  example: `box/test.R` file 
+  </div>
+  
+  <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    glue[glue]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  , stringr[str_to_lower, str_to_title]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; not exported, used WITHIN only </span></span>
+<span id="cb1-7"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>greeting <span class="ot">&lt;-</span> <span class="st">&quot;Hello&quot;</span> </span>
+<span id="cb1-8"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Greet Someone when Given a Name  </span></span>
+<span id="cb1-10"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span><span class = "cf">@param </span><span class="var">name </span><span class="co">A character string </span></span>
+<span id="cb1-11"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span><span class = "cf">@return </span><span class="co">Greeting with input name  </span></span>
+<span id="cb1-12"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span><span class = "cf">@export </span></span>
+<span id="cb1-13"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span><span class = "cf">@examples </span></span>
+<span id="cb1-14"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; say_hello(&quot;Martha&quot;)</span></span>
+<span id="cb1-15"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>say_hello <span class="ot">&lt;-</span> <span class="cf">function</span>(name){</span>
+<span id="cb1-16"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  to_use <span class="ot">&lt;-</span> <span class="fu">str_to_title</span>(<span class="fu">str_to_lower</span>(name))</span>
+<span id="cb1-17"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glue</span>(<span class="st">&quot;{greeting}, {to_use}&quot;</span>)</span>
+<span id="cb1-18"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 
-box::use(
-    glue[glue]
-  , stringr[str_to_lower, str_to_title]
-)
+</div>
+<div id="column2" class = "mycolumn"> 
 
-greeting <- "Hello" #not exported so can be used WITHIN box module but NOT EXTERNALLY 
+   <div class = "colheader">Import Module</div>
+  
+  <div style="height: 2em;">
+  Pathway to module file, do not include `.R` extension 
+  </div>
+  
+  <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
+  <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  box<span class="sc">/</span>test </span>
+  <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 
-#' Greet Someone when Given a Name  
-#' @param name A character string 
-#' @return Greeting wtih input name  
-#' @export 
-#' @examples 
-#' say_hello("Martha")
-say_hello <- function(name){
-  to_use <- str_to_title(str_to_lower(name))
-  glue("{greeting}, {to_use}")
-}
-```
+  
+</div>
+<div id="column3" class = "mycolumn"> 
 
-## Import Box Module for Use
+  <div class = "colheader">Use Module!</div>
+  
+  <div style="height: 2em;">
+  Use `$` to use exported functions (similar to `::` for packages)
+  </div>
+  
+  <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span><span class="fu">say_hello</span>(<span class="st">&quot;Martha&quot;</span>)</span></code></pre></div>
+  <pre><code>## Hello, Martha</code></pre></div>
 
-- `box`: name of folder where `test.R` box module is located 
-- `test`: name *without extenstion* of box module 
-
-```{r}
-box::use(
-  box/test 
-)
-```
-
-
-## Use Functions! 
-
-with CRAN packages use double colon `::` to call a function from a specific package, with modules use `$` 
-
-```{r}
-test$say_hello("Martha")
-```
+</div>
 
 
 
