@@ -2,7 +2,7 @@
 title: "Using Box"
 output: 
   html_document:
-    number_section: true
+    number_section: false 
     code_folding: hide
 editor_options: 
   chunk_output_type: console
@@ -24,7 +24,7 @@ box::use(
   , cowplot[plot_grid]
 )
 
-knitr::opts_chunk$set(fig.width = 12, fig.height = 12)
+knitr::opts_chunk$set(fig.width = 12, fig.height = 6)
 
 ```
 
@@ -35,15 +35,22 @@ B. Slope plot of average of `cty` for years 1999 and 2008 by `manufacturer`, `cy
 
 ```{r}
 plot_grid(
-    Abox$createplot("manufacturer")
-  , Abox$createplot("cyl")
-  , Abox$createplot("drv")
+    Abox$createplot("drv")
   , Abox$createplot("class")
-  , Bbox$createplot("manufacturer")
-  , Bbox$createplot("cyl")
   , Bbox$createplot("drv")
   , Bbox$createplot("class")
   , align = "hv", axis = "tblr", ncol = 2
 )
 ```
 
+#### Additional Variables: `manufacturer` and `cyl` 
+
+```{r}
+plot_grid(
+    Abox$createplot("manufacturer")
+  , Abox$createplot("cyl")
+  , Bbox$createplot("manufacturer")
+  , Bbox$createplot("cyl")
+  , align = "hv", axis = "tblr", ncol = 2
+)
+```
