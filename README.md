@@ -38,3 +38,15 @@ class(glue_out)
 #> [1] "glue"      "character"
 ```
 
+## EX_LONG 
+
+- create two types of plots for multiple variables 
+- 3 examples without using box in `nobox-my.Rmd` file 
+- 1 example using box modules in `my.Rmd` file
+- box modules in `myboxes` folder 
+
+## EX_SHORT 
+
+- one output function to create a greeting when name is given 
+- box module is in `box` folder 
+- use box module in the `my.R` file 

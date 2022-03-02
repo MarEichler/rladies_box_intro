@@ -88,7 +88,7 @@ Introduce the `{box}` package and show how it can be used to write modularized/o
 - two types of plots  
 - want to create 2 of each type of plot using different variables 
 
-<small>*Note:* this is a simplified version of the example in the `DIR_ROOT` folder of the repository, using `mpg` data from the `{ggplot2}`</small>  
+<small>*Note:* this is a simplified version of the example in the `EX_LONG` folder of the repository, using `mpg` data from the `{ggplot2}`</small>  
 
 <div id = "contentbox", style = "width: 90%; display: block; margin-left: auto; margin-right: auto;">
   <div id="column1" style="float:left; width:49%;">
@@ -274,16 +274,27 @@ More situations/dimensions &#8658; Longer function
   </ul>
 </div>
 <div id="column2" style="float:left; width:38%;">
-  Example folder structure:  
+  Examples of folder structures:  
   <div class="sourceCode" id="cb1"><pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span 
-      id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>DIR_ROOT  </span>
+      id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>EX_LONG  </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>| </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>|---myboxes <span class="co">#folder with modules</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>|   |  </span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>|   |---Abox.R   </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>|   |---Bbox.R  </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>|   </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>|---my.Rmd <span class="co">#rmd file using box modules</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>|   |---admin.R   </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>|   |---Bbox.R  </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>|   </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>|---my.Rmd <span class="co">#rmd file using box modules</span></span>
+</code></pre></div>
+
+  <div class="sourceCode" id="cb1"><pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span 
+      id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>EX_SHORT  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>| </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>|---box <span class="co">#folder with module</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>|   |  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>|   |---greet.R   </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>|   </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>|---my.R <span class="co">#r file using box module</span></span>
 </code></pre></div>
 </div>
 
@@ -391,14 +402,14 @@ More situations/dimensions &#8658; Longer function
 </div>
 
 
-# Box: Use Module Functions
+# Box: Use Module Functions (EX_SHORT)
 
 <div id="column1" class = "mycolumn"> 
 
   <div class = "colheader">Write Code</div>
   
-  <div style="height: 2em;">
-  <p>example: `box/test.R` file</p>
+  <div style="height: 3.15em;">
+  <p>File: `box/greet.R`</p>
   </div>
   
   <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
@@ -425,12 +436,12 @@ More situations/dimensions &#8658; Longer function
 
    <div class = "colheader">Import Module</div>
   
-  <div style="height: 2em;">
-  <p>Pathway to module file, do not include `.R` extension</p>
+  <div style="height: 3.15em;">
+  <p>File: `my.R` <br> Pathway to module file,<br> do not include `.R` extension</p>
   </div>
   
   <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
-  <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  box<span class="sc">/</span>test </span>
+  <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  box<span class="sc">/</span>greet </span>
   <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 
   
@@ -439,11 +450,11 @@ More situations/dimensions &#8658; Longer function
 
   <div class = "colheader">Use Module!</div>
   
-  <div style="height: 2em;">
-  <p>Use `$` to use exported functions (similar to `::` for packages)</p>
+  <div style="height: 3.15em;">
+  <p>File: `my.R` <br>Use `$` to use exported functions<br>(similar to `::` for packages)</p>
   </div>
   
-  <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span><span class="fu">say_hello</span>(<span class="st">&quot;Martha&quot;</span>)</span></code></pre></div>
+  <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>greet<span class="sc">$</span><span class="fu">say_hello</span>(<span class="st">&quot;Martha&quot;</span>)</span></code></pre></div>
   <pre><code>## Hello, Martha</code></pre></div>
 
 </div>
@@ -469,7 +480,7 @@ More situations/dimensions &#8658; Longer function
 <span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box::<span class="fu">use</span>( ./admin)  </span>
 </code></pre></div>
   <div class="sourceCode" id="cb2"><pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span 
-      id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>DIR_ROOT  </span>
+      id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>EX_LONG  </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>| </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>|---myboxes <span class="co">#folder with modules</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>|   |  </span>
@@ -481,13 +492,13 @@ More situations/dimensions &#8658; Longer function
 </code></pre></div>
 </div>
 <div class="keeptogether">
-<div style="text-indent: 25px;">Use a box module <b>up at directory</b></div>
+<div style="text-indent: 25px;">Use a box module <b>up a directory</b></div>
   <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span 
       id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#within reports/my.Rmd file</span></span>
 <span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box::<span class="fu">use</span>( ../myboxes/admin)  </span>
 </code></pre></div>
   <div class="sourceCode" id="cb2"><pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span 
-      id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>DIR_ROOT  </span>
+      id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>EX_LONG_REPORT_FOLDER  </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>| </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>|---myboxes <span class="co">#folder with modules</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>|   |  </span>

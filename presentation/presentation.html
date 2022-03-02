@@ -123,7 +123,7 @@ Box modules are like mini-packages: help re-use or share code without the much l
 </li>
 <li>want to create 2 of each type of plot using different variables</li>
 </ul>
-<p><small><em>Note:</em> this is a simplified version of the example in the <code>DIR_ROOT</code> folder of the repository, using <code>mpg</code> data from the <code>{ggplot2}</code></small></p>
+<p><small><em>Note:</em> this is a simplified version of the example in the <code>EX_LONG</code> folder of the repository, using <code>mpg</code> data from the <code>{ggplot2}</code></small></p>
 <div id="contentbox" , style="width: 90%; display: block; margin-left: auto; margin-right: auto;">
   <div id="column1" style="float:left; width:49%;">
     <center><b>A: Frequency Bar Plot</b><br>Character or Discrete Numeric Variables</center>
@@ -310,17 +310,28 @@ similar to including images or sourcing another file
 </ul>
 </div>
 <div id="column2" style="float:left; width:38%;">
-Example folder structure:<br />
+Examples of folder structures:<br />
 
 <div id="cb1" class="sourceCode">
-<pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>DIR_ROOT  </span>
+<pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>EX_LONG  </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>| </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>|---myboxes <span class="co">#folder with modules</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>|   |  </span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>|   |---Abox.R   </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>|   |---Bbox.R  </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>|   </span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>|---my.Rmd <span class="co">#rmd file using box modules</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>|   |---admin.R   </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>|   |---Bbox.R  </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>|   </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>|---my.Rmd <span class="co">#rmd file using box modules</span></span>
+</code></pre>
+</div>
+<div id="cb1" class="sourceCode">
+<pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>EX_SHORT  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>| </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>|---box <span class="co">#folder with module</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>|   |  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>|   |---greet.R   </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>|   </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>|---my.R <span class="co">#r file using box module</span></span>
 </code></pre>
 </div>
 </div>
@@ -475,15 +486,15 @@ Need to have cursor within a function
 </div>
 </div>
 </div>
-<div id="box-use-module-functions" class="slide section level1">
-<h1>Box: Use Module Functions</h1>
+<div id="box-use-module-functions-ex_short" class="slide section level1">
+<h1>Box: Use Module Functions (EX_SHORT)</h1>
 <div id="column1" class="mycolumn">
 <div class="colheader">
 Write Code
 </div>
-<div style="height: 2em;">
+<div style="height: 3.15em;">
 <p>
-example: <code>box/test.R</code> file
+File: <code>box/greet.R</code>
 </p>
 </div>
 <div id="cb1" class="sourceCode">
@@ -511,14 +522,14 @@ example: <code>box/test.R</code> file
 <div class="colheader">
 Import Module
 </div>
-<div style="height: 2em;">
+<div style="height: 3.15em;">
 <p>
-Pathway to module file, do not include <code>.R</code> extension
+File: <code>my.R</code> <br> Pathway to module file,<br> do not include <code>.R</code> extension
 </p>
 </div>
 <div id="cb2" class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
-  <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  box<span class="sc">/</span>test </span>
+  <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  box<span class="sc">/</span>greet </span>
   <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>)</span></code></pre>
 </div>
 </div>
@@ -526,13 +537,13 @@ Pathway to module file, do not include <code>.R</code> extension
 <div class="colheader">
 Use Module!
 </div>
-<div style="height: 2em;">
+<div style="height: 3.15em;">
 <p>
-Use <code>$</code> to use exported functions (similar to <code>::</code> for packages)
+File: <code>my.R</code> <br>Use <code>$</code> to use exported functions<br>(similar to <code>::</code> for packages)
 </p>
 </div>
 <div id="cb3" class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span><span class="fu">say_hello</span>(<span class="st">&quot;Martha&quot;</span>)</span></code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>greet<span class="sc">$</span><span class="fu">say_hello</span>(<span class="st">&quot;Martha&quot;</span>)</span></code></pre>
 </div>
 <pre><code>## Hello, Martha</code></pre>
 </div>
@@ -568,7 +579,7 @@ Use a box module <b>within</b> the same folder
 </code></pre>
 </div>
 <div id="cb2" class="sourceCode">
-<pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>DIR_ROOT  </span>
+<pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>EX_LONG  </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>| </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>|---myboxes <span class="co">#folder with modules</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>|   |  </span>
@@ -582,7 +593,7 @@ Use a box module <b>within</b> the same folder
 </div>
 <div class="keeptogether">
 <div style="text-indent: 25px;">
-Use a box module <b>up at directory</b>
+Use a box module <b>up a directory</b>
 </div>
 <div id="cb1" class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#within reports/my.Rmd file</span></span>
@@ -590,7 +601,7 @@ Use a box module <b>up at directory</b>
 </code></pre>
 </div>
 <div id="cb2" class="sourceCode">
-<pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>DIR_ROOT  </span>
+<pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>EX_LONG_REPORT_FOLDER  </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>| </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>|---myboxes <span class="co">#folder with modules</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>|   |  </span>
