@@ -1,0 +1,49 @@
+---
+title: "Using Box"
+output: 
+  html_document:
+    number_section: true
+    code_folding: hide
+editor_options: 
+  chunk_output_type: console
+---
+<!-- this makes the page wider --> 
+<style type="text/css">
+.main-container {
+  max-width: 1200px !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+```{r setup }
+
+box::use(
+    myboxes/Abox
+  , myboxes/Bbox
+  , cowplot[plot_grid]
+)
+
+knitr::opts_chunk$set(fig.width = 12, fig.height = 12)
+
+```
+
+**Goal:** 
+
+A. Frequency of cars by `manufacturer`, `cyl`, `drv` and `class`   
+B. Slope plot of average of `cty` for years 1999 and 2008 by `manufacturer`, `cyl`, `drv` and `class` 
+
+```{r}
+plot_grid(
+    Abox$createplot("manufacturer")
+  , Abox$createplot("cyl")
+  , Abox$createplot("drv")
+  , Abox$createplot("class")
+  , Bbox$createplot("manufacturer")
+  , Bbox$createplot("cyl")
+  , Bbox$createplot("drv")
+  , Bbox$createplot("class")
+  , align = "hv", axis = "tblr", ncol = 2
+)
+```
+

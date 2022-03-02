@@ -3,19 +3,11 @@ box::use(
   tidyr[tribble]
 )
 
-#' Title
-#'
-#' @param x 
-#'
-#' @return
-#' @export
-#'
-#' @examples
-
+#' Listing Out Variables and their Names 
 varnames <- tribble(
   ~var, ~name
-  , "manufacturer", "Vehicle Manufacturer"
-  , "model"       , "Vehicle Model Name"
+  , "manufacturer", "Manufacturer"
+  , "model"       , "Model Name"
   , "displ"       , "Engine Displacement in Liters"
   , "year"        , "Year of Manufacturing"
   , "cyl"         , "Number of Cylinders"
@@ -24,18 +16,19 @@ varnames <- tribble(
   , "cty"         , "City Miles per Gallon"
   , "hwy"         , "Highway Miles per Gallon"
   , "fl"          , "Fuel Type"
-  , "class"      , "Vehicle Class"
+  , "class"       , "Class"
 )
 
 
-#' Title
+#' Pull Name to Use in Plot 
 #'
-#' @param x 
+#' @param VARst A Character string 
 #'
-#' @return
+#' @return A Character full name 
 #' @export
 #'
 #' @examples
-m <- function(x){
-  
+#' name("manufacturer")
+name <- function(VARst){
+  varnames[which(varnames$var == VARst),]$name
 }
