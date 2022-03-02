@@ -20,8 +20,9 @@ Introduce the `{box}` package and show how it can be used to write modularized/o
 ### Packages Used in the Making of this Presentation/Examples
 
 - [`{box}`](https://klmr.me/box/)
+- [`{cowplot}`](https://wilkelab.org/cowplot/index.html): layout multiple plots using `plot_grid()` 
 - [`{glue}`](https://glue.tidyverse.org/): used to combine strings and R code (similar to `paste/paste0`)
-- [`{tidyverse}`](https://www.tidyverse.org/) specifically `{ggplot2}`, `{dplyr}`, `{stringr}`, and `{tidyr}`
+- [`{tidyverse}`](https://www.tidyverse.org/) specifically [`{dplyr}`](https://dplyr.tidyverse.org/), [`{ggplot2}`](https://ggplot2.tidyverse.org/), [`{stringr}`](https://stringr.tidyverse.org/), and [`{tidyr}`](https://tidyr.tidyverse.org/)
 
 
 # `{box}` 
@@ -178,76 +179,76 @@ More situations/dimensions &#8658; Longer function
   </tr>
   <tr>
     <td class = "fst">Namespace Usage</td>
-    <td> 
+    <td style="background-color: var(--bred);"> 
       <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
       Constantly have to create unique names for objects
     </td>
-    <td> 
+    <td style="background-color: var(--byel);"> 
       <img class="myemoji" src="img/yellow_meh.svg" alt="Yellow Meh"><br>
       Only use name space for specific functions and/or dependencies 
     </td>
-    <td> 
+    <td style="background-color: var(--bgre);"> 
       <img class="myemoji" src="img/green_smile.svg" alt="Green Smile"><br>
       Only use name space for specific function 
     </td>
-    <td> 
+    <td style="background-color: var(--bgre);"> 
       <img class="myemoji" src="img/green_smile.svg" alt="Green Smile"><br>
       Only use name space for box modules 
     </td>
   </tr>
   <tr>
     <td class = "fst">Testing Code</td>
-    <td> 
+    <td style="background-color: var(--byel);"> 
       <img class="myemoji" src="img/yellow_meh.svg" alt="Yellow Meh"><br>
       Testing code as written but shouldn’t repeat code multiple times 
     </td>
-    <td> 
+    <td style="background-color: var(--bgre);"> 
       <img class="myemoji" src="img/green_smile.svg" alt="Green Smile"><br>
       Functions are sectioned so can test at each level 
     </td>
-    <td> 
+    <td style="background-color: var(--bred);"> 
       <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
       Difficult to test individual sections once function get extremely long 
     </td>
-    <td> 
+    <td style="background-color: var(--bgre);"> 
       <img class="myemoji" src="img/green_smile.svg" alt="Green Smile"><br>
       All testing can be done within the module 
     </td>
   </tr>
   <tr>
     <td class = "fst">Share/Re-Use</td>
-    <td> 
+    <td style="background-color: var(--bred);"> 
       <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
       Have to piece through which code to keep and then amend to new program
     </td>
-    <td> 
+    <td style="background-color: var(--bred);"> 
       <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
       Put functions together and document dependencies 
     </td>
-    <td> 
+    <td style="background-color: var(--byel);"> 
       <img class="myemoji" src="img/yellow_meh.svg" alt="Yellow Meh"><br>
       One function but may be challenging to amend to a different situation or different machine
     </td>
-    <td> 
+    <td style="background-color: var(--bgre);"> 
       <img class="myemoji" src="img/green_smile.svg" alt="Green Smile"><br>
       Just send the box modules <code>.R</code> files 
     </td>
   </tr>
   <tr>
     <td class = "fst">Additional Dimensions</td>
-    <td>
+    <td style="background-color: var(--bred);">
       <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
       New code either added to existing code or new section, bad practice if will use multiple times 
     </td>
-    <td>
+    <td style="background-color: var(--bred);">
       <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
       Manageable to difficult depending on how much each of the functions and their dependencies need to change 
     </td>
-    <td>
+    <td style="background-color: var(--bred);">
       <img class="myemoji" src="img/red_frown.svg" alt="Red Frown"><br>
       Difficult given that the function is so large, adding a new dimension would be challenging 
     </td>
-    <td>
+    <td style="background-color: var(--bgre);">
       <img class="myemoji" src="img/green_smile.svg" alt="Green Smile"><br>
       Adjust easily within the box module or create a new box module (depending on situation) 
     </td>
@@ -267,14 +268,14 @@ More situations/dimensions &#8658; Longer function
   <ul>
     <li>Box modules are created using <code>.R</code> files</li>
     <li>Keep all modules in specific folder</li>
-    <li>Folder can be named anything (often see 'box' or 'modules'</li>
+    <li>Folder can be named anything (often see 'box' or 'modules')</li>
     <li>How you call box modules (pathways) will depend on the structure of folders </li>
     <li>similar to including images or sourcing another file</li>
   </ul>
 </div>
 <div id="column2" style="float:left; width:38%;">
   Example folder structure:  
-  <div class="sourceCode" id="cb1"><pre class="sourceCode r" style="border: 1px solid white;"><code class="sourceCode r"><span 
+  <div class="sourceCode" id="cb1"><pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span 
       id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>DIR_ROOT  </span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>| </span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>|---myboxes <span class="co">#folder with modules</span></span>
@@ -397,12 +398,12 @@ More situations/dimensions &#8658; Longer function
   <div class = "colheader">Write Code</div>
   
   <div style="height: 2em;">
-  example: `box/test.R` file 
+  <p>example: `box/test.R` file</p>
   </div>
   
   <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    glue[glue]</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  , stringr[str_to_lower, str_to_title]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  , stringr[str_to_title]</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; not exported, used WITHIN only </span></span>
@@ -415,7 +416,7 @@ More situations/dimensions &#8658; Longer function
 <span id="cb1-13"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span><span class = "cf">@examples </span></span>
 <span id="cb1-14"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; say_hello(&quot;Martha&quot;)</span></span>
 <span id="cb1-15"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>say_hello <span class="ot">&lt;-</span> <span class="cf">function</span>(name){</span>
-<span id="cb1-16"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  to_use <span class="ot">&lt;-</span> <span class="fu">str_to_title</span>(<span class="fu">str_to_lower</span>(name))</span>
+<span id="cb1-16"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  to_use <span class="ot">&lt;-</span> <span class="fu">str_to_title</span>(name)</span>
 <span id="cb1-17"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glue</span>(<span class="st">&quot;{greeting}, {to_use}&quot;</span>)</span>
 <span id="cb1-18"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 
@@ -425,7 +426,7 @@ More situations/dimensions &#8658; Longer function
    <div class = "colheader">Import Module</div>
   
   <div style="height: 2em;">
-  Pathway to module file, do not include `.R` extension 
+  <p>Pathway to module file, do not include `.R` extension</p>
   </div>
   
   <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
@@ -439,7 +440,7 @@ More situations/dimensions &#8658; Longer function
   <div class = "colheader">Use Module!</div>
   
   <div style="height: 2em;">
-  Use `$` to use exported functions (similar to `::` for packages)
+  <p>Use `$` to use exported functions (similar to `::` for packages)</p>
   </div>
   
   <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>test<span class="sc">$</span><span class="fu">say_hello</span>(<span class="st">&quot;Martha&quot;</span>)</span></code></pre></div>
@@ -450,33 +451,24 @@ More situations/dimensions &#8658; Longer function
 
 # Box: Tips 
 
-### Use Module after Changes 
-
-If you make changes to box module, need to **reload** module in order to changes to be in effect  
-
-<div>
-<div id="column1" class="mycolumn" style="width:47.25%;">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span 
-      id="cb1-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box::reload(Abox) <span class="co">#just include name, not full pathway/folder</span></span>
-</code></pre></div>
-</div>
-<div id="column2" class="mycolumn" style="width:47.25%;">
-Restart R Session (Shift+Ctrl+F10) and then re-run all code (including `box::use()`) 
-</div>
+<h3 style="margin-bottom: 15px;">Use Module after Changes</h3>
+<p style="margin-bottom: 0px; margin-top: 0px;">If you make changes to box module, need to **reload** module in order to changes to be in effect</p> 
+<div class="mycols2">
+  <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box::reload(Abox) <span class="co">#just include name, not full pathway/folder</span></span></code></pre></div>
+  <div style="padding-top:15px; padding-left:25px;">Restart R Session (Shift+Ctrl+F10) and then re-run all code (including `box::use()`)</div>
 </div>
 
 
-### Pathways
+<h3 style="margin-bottom: 15px;">Pathways</h3>
 
-<div id="column1" style="float:left; width:49.25%;">
-<div style="text-indent:25px;">Use a box module <b>within</b> the same folder</div>
-
+<div class="mycols2">
+<div class="keeptogether">
+<div style="text-indent: 25px;">Use a box module <b>within</b> the same folder</div>
   <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span 
       id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#within Abox.R file</span></span>
 <span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box::<span class="fu">use</span>( ./admin)  </span>
 </code></pre></div>
-
-  <div class="sourceCode" id="cb2"><pre class="sourceCode r" style="border: 1px solid white;"><code class="sourceCode r"><span 
+  <div class="sourceCode" id="cb2"><pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span 
       id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>DIR_ROOT  </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>| </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>|---myboxes <span class="co">#folder with modules</span></span>
@@ -488,15 +480,13 @@ Restart R Session (Shift+Ctrl+F10) and then re-run all code (including `box::use
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>|---my.Rmd <span class="co">#rmd file using box modules</span></span>
 </code></pre></div>
 </div>
-<div id="column2" style="float:left; width:49%;">
-<div style="text-indent:25px;">Use a box module <b>up at directory</b></div>
-
+<div class="keeptogether">
+<div style="text-indent: 25px;">Use a box module <b>up at directory</b></div>
   <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span 
       id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#within reports/my.Rmd file</span></span>
 <span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box::<span class="fu">use</span>( ../myboxes/admin)  </span>
 </code></pre></div>
-
-  <div class="sourceCode" id="cb2"><pre class="sourceCode r" style="border: 1px solid white;"><code class="sourceCode r"><span 
+  <div class="sourceCode" id="cb2"><pre class="sourceCode r" style="border: 0.5px solid var(--darkgrey);"><code class="sourceCode r"><span 
       id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>DIR_ROOT  </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>| </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>|---myboxes <span class="co">#folder with modules</span></span>
@@ -506,9 +496,9 @@ Restart R Session (Shift+Ctrl+F10) and then re-run all code (including `box::use
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>|   |---Bbox.R  </span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>|   </span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>|---reports <span class="co">#rmd file using box modules</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>|   |  </span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>|   |---my.Rmd   </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    |  </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    |---my.Rmd   </span>
 </code></pre></div>
 </div>
-
+</div>
 </div>
