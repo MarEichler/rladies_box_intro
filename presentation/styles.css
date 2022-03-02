@@ -9,8 +9,9 @@
 
 
 h1 {
-font-weight: bold; 
-color: var(--darkblue) !important; 
+  font-weight: bold; 
+  color: var(--darkblue) !important; 
+  font-size: 2em !important;
 }
 
 body {
@@ -46,11 +47,12 @@ div.outputcode {
 }
 
 a {
-  color: var(--darkblue) !important; 
+  color: #744953 !important; 
 }
 
 a:hover {
   background-color: var(--liteblue);
+  color: var(--darkblue) !important;
 }
 
 img.myimg {
@@ -83,11 +85,16 @@ img.myimg {
   text-align: center;
   font-weight: bold;
   background-color: var(--liteblue);
-  font-size: 1.7em;
+  font-size: 1.5em;
   line-height: 1.5;
   margin-bottom: 15px;
 }
 
+/* make second bullet points regular font (instead of default italic) */  
+
+li {
+  font-style: normal !important; 
+}
 
 .mycolumn {
   float:left; 
@@ -98,7 +105,7 @@ img.myimg {
 
 /* change code chunk colors */ 
 
-code span.co {color: #707070;} /* grey */ 
+code span.co {color: #707070; font-style: italic;} /* grey */ 
 code span.ot {color: var(--darkgrey);} 
 code span.st {color: #008514;} /* green */ 
 code span.cf {color: #A85D00;} /* orange */ 
@@ -107,8 +114,9 @@ code span.sc {color: var(--darkgrey); }
 code span.fu {color: #0736F2; } /* bright blue */ 
 
 pre.sourceCode {
-background-color: var(--litegrey); 
-color: var(--darkgrey); 
+  background-color: var(--litegrey); 
+  color: var(--darkgrey); 
+  font-size: 0.9em !important;  
 }
 
 pre {

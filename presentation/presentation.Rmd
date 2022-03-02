@@ -15,8 +15,9 @@ output:
 Introduce the `{box}` package and show how it can be used to write modularized/organized code and manage the name space.  
 
 **Disclaimer:** I have been using this package for about 6 months and I'm still learning new things everyday!  Please ask as many questions as you want, but I may not know the answer.  
+<br>
 
-### Packages Used in the Making of this Presentation
+### Packages Used in the Making of this Presentation/Examples
 
 - [`{box}`](https://klmr.me/box/)
 - [`{glue}`](https://glue.tidyverse.org/): used to combine strings and R code (similar to `paste/paste0`)
@@ -44,9 +45,9 @@ Introduce the `{box}` package and show how it can be used to write modularized/o
 - Clean-up/Manage name space 
 - Modular-ize code without having to write full package 
   * purposeful and organized code 
-  * if change code within box module, importation of box module doesn't change 
+  * if change code within box module, importation of box module doesn't change   
 
-Box modules are like mini-packages: help re-use or share code without the much larger hurdle of developing a whole R package 
+<div style="font-family: Ubuntu Thin; font-size: 1.25em; line-height: 1.5; padding-top: 10px; padding-bottom: 10px;">Box modules are like mini-packages: help re-use or share code without the much larger hurdle of developing a whole R package</div>
 
 - re-use code for yourself if doing similar actions frequently 
 - share code internally with peers/colleague (create consistency)
@@ -262,114 +263,134 @@ More situations/dimensions &#8658; Longer function
 
 # Box: File/Folder Structure 
 
-- Box modules are simply `.R` files with specific instructions
-- Best to put all modules into a folder to keep organized 
-- Folder can be named anything (I often see 'box' or 'modules')
-
-Example folder structure: 
-
-<div style="font-family: Ubuntu Mono; font-size: 0.90em; background-color: var(--liteblue); width: 60%;">
-DIR_ROOT  
-|  
-|---myboxes <i>#folder can have any name</i>   
-|   |  
-|   |---Abox.R   
-|   |---Bbox.R  
-|   
-|---my.Rmd  <i>#main RMD file that will generate report/html</i>  
+<div id="column1" style="float:left; width:61%;">
+  <ul>
+    <li>Box modules are created using <code>.R</code> files</li>
+    <li>Keep all modules in specific folder</li>
+    <li>Folder can be named anything (often see 'box' or 'modules'</li>
+    <li>How you call box modules (pathways) will depend on the structure of folders </li>
+    <li>similar to including images or sourcing another file</li>
+  </ul>
+</div>
+<div id="column2" style="float:left; width:38%;">
+  Example folder structure:  
+  <div class="sourceCode" id="cb1"><pre class="sourceCode r" style="border: 1px solid white;"><code class="sourceCode r"><span 
+      id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>DIR_ROOT  </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>| </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>|---myboxes <span class="co">#folder with modules</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>|   |  </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>|   |---Abox.R   </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>|   |---Bbox.R  </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>|   </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>|---my.Rmd <span class="co">#rmd file using box modules</span></span>
+</code></pre></div>
 </div>
 
-- how you call box modules will depend on the structure of folders 
-- similar to including images or sourcing (`source(file.R)`)
+</div>
 
 
-# Box: External Packages
+# Box: External Packages/Modules
 
 - when starting your box module will need to use package (e.g. `{ggplot2}`, `{dplyr}`, etc.)
+- may also want to use other box modules as well 
 - Usually load packages using `library()` command 
 - Need to load packages and functions with `box::use()`, NOT `library()`
 
 <div class = "quote">
 `box::use` is a **universal import declaration**. It works for packages just as well as for modules. In fact, ‘box’ completely replaces the base R `library` and `require` functions. `box::use` is more explicit, more flexible, and less error-prone than `library`. At its simplest, it provides a direct replacement
 </div>
-<div class = "quotesource"><a href = "https://klmr.me/box/#loading-code" target = "_blank" style = "color: black !important;">- klmr.me/box/#loading-code</a></div>
+<div class = "quotesource"><a href = "https://klmr.me/box/#loading-code" target = "_blank">- klmr.me/box/#loading-code</a></div>
 
 
 # Box: `box::use()` 
 
-### To Use Box Module 
+<div id="column1" class = "mycolumn"> 
 
-`box::use( myboxes/Abox)` 
+<div class = "colheader">Use Box Module</div>
+  
+<div class="sourceCode" style="padding-top: 1px;" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span 
+   id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>box::use(myboxes/Abox)  </span>
+</code></pre></div>
 
-- `myboxes`: folder where box module file is located 
-- `Abox`: name of box module to load (*without* the `.R` extension)
+  <ul>
+    <li><code>myboxes</code>: folder where box module file is located </li>
+    <li><code>Abox</code>: name of box module to load (*without* the `.R` extension)</li>
+  </ul>
 
+</div>
+<div id="column2" class = "mycolumn" style="width: 65% !important;"> 
 
-### To Use Packages 
+<div class = "colheader">Use External Packages</div>
+<div id="column1" style="float:left; width:49%;">
+  <div class="sourceCode"  id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span 
+   id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>box::use(dplyr[...])</span>
+</code></pre></div>
+  <ul>
+    <li>Imports <code>{dplyr}</code> and attached all exported names</li>
+    <li>Similar to <code>library(dplyr)</code></li>
+    <li>Use any <code>{dplyr}</code> functions without specifying the package name</li>
+    <li>If just use <code>box::use(dplyr)</code>, would not be able to use functions without calling package (i.e. <code>dplyr::filter</code>)
+  </ul>
+</div>
+<div id="column2" style="float:right; width:49%;">
+<div class="sourceCode"  id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span 
+   id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>box::use(dplyr[filter, select])  </span>
+</code></pre></div>
+  <ul>
+    <li>Imports  <code>{dplyr}</code> and attaches the names <code>dplyr::filter</code> and <code>dplyr::select</code></li>
+    <li>Use <code>filter()</code> and <code>select()</code> from <code>{dplyr}</code></li>
+    <li>Would <b>not</b> be able to use <code>mutate()</code></li>
+    <li>Could use <code>dplyr::mutate()</code></li>
+  </ul>
+</div>
 
-<div id = "contentbox2", style = "width: 100%;">
-  <div id="column1" style="float:left; width:49%;">
-    <center style = "background-color: var(--liteblue);">
-      <code>box::use(</code>
-      <code><b>dplyr[...]</b></code>
-      <code>)</code></b></center><br>
-    <ul>
-      <li>Imports <code>{dplyr}</code> and attached all exported names</li>
-      <li>Similar to <code>library(dplyr)</code></li>
-      <li>Use any <code>{dplyr}</code> functions without specifying the package name</li>
-      <li>If just use <code>box::use(dplyr)</code>, would not be able to use functions without calling package (i.e. <code>dplyr::filter</code>)
-    </ul>
-  </div>
-  <div id="column2" style="float:right; width:49%;">
-    <center style = "background-color: var(--liteblue);">
-      <code>box::use(</code>
-      <code><b>dplyr[filter, select]</b></code>
-      <code>)</code></b></center><br>
-    <ul>
-      <li>Imports  <code>{dplyr}</code> and attaches the names <code>dplyr::filter</code> and <code>dplyr::select</code></li>
-      <li>Use <code>filter()</code> and <code>select()</code> from <code>{dplyr}</code></li>
-      <li>Would <b>not</b> be able to use <code>mutate()</code></li>
-      <li>Could use <code>dplyr::mutate()</code></li>
-    </ul>
-  </div>
+  
 </div>
 
 
 
 
-# Box: Write Your Functions/Code (boring text info)   
+# Box: Write Your Functions/Code with Roxygen
 
-- can use anything in the box modules as dependencies for functions 
-- only need to export the final functions you want to use outside of the module 
-   * in order to export need to use `#' @export` 
-- Use [Roxygen](https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html): 
-   * `#'` before each line with information on function 
-   * `@param` details out the variable inputs (each input has own line) 
-   * `@return` details what function returns 
-   * `@export` export item, to use outside module [REQUIRED if want to use outside of module]
-   * `@example` examples of using function 
-   * can include as many or as few as you want (best practice to include all but I often don't, c'est la vie)
-- Shortcut to Insert Roxygen Skeleton (need to have cursor within a function): 
-  * Windows/Linux: Ctrl+Shift+Alt+R
-  * Mac: Option+Shift+Command+R
-  * Roxygen is a way to document code, it's used in the development of R packages
-  
-**Roxygen Skeleton**
-  
-```{r, eval = FALSE}
-#' Title
-#'
-#' @param 
-#'
-#' @return
-#' @export
-#'
-#' @examples
+<div id="column1" style="float:left; width:60%;">
+  <ul>
+    <li>Can use anything within box modules within functions</li>
+    <li>Only need to export the final functions you want to use outside the module</li>
+    <li>Use <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/roxygen2.html" target="_blank">Roxygen</a>
+    <ul>
+      <li>Roxygen is a way to document code, it's used in the development of R packages</li>
+      <li><code><span class="co" style="font-weight: bold;">#'</span></code>: before each line with information on item</li>
+      <li><code><span class="cf">@param</span></code>: specifies variable inputs (each input has own line) </li>
+      <li><code><span class="cf">@return</span></code>: specify output (if function)</li>
+      <li><code><span class="cf">@export</span></code>: export item (REQUIRED if using outside of module)</li>
+      <li><code><span class="cf">@examples</span></code>: examples of use</li>
+      <li>can include as many or as few as you want </li>
+      <li>best practice to include all but I often don't, c'est la vie</li>
+      <li><span style="font-family: Ubuntu Thin;">best practices are a <i>journey</i> not a destination</span></li>
+    </ul>
+  </ul>
+</div>
+<div id="column2" style="float:right; width:38%;">
+  <b>Roxygen Skeleton</b>
+  <ul>
+    <li>Windows/Linux: Ctrl+Shift+Alt+R</li>
+    <li>Mac: Option+Shift+Command+R</li>
+    <li>Need to have cursor within a function</li>
+  </ul>
+  <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span
+      id="cb1-1"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; Title  </span></span>
+<span id="cb1-2"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span></span>
+<span id="cb1-3"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span><span class = "cf">@param </span><span class="var">[param] </span></span>
+<span id="cb1-4"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span></span>
+<span id="cb1-5"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span><span class = "cf">@return  </span></span>
+<span id="cb1-6"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span><span class = "cf">@export  </span></span>
+<span id="cb1-7"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span></span>
+<span id="cb1-8"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span><span class = "cf">@examples</span></span>
+</code></pre></div>
+</div>
 
-```
 
-
-# Box: Write Your Functions/Code 
+# Box: Use Module Functions
 
 <div id="column1" class = "mycolumn"> 
 
@@ -427,5 +448,67 @@ DIR_ROOT
 </div>
 
 
+# Box: Tips 
+
+### Use Module after Changes 
+
+If you make changes to box module, need to **reload** module in order to changes to be in effect  
+
+<div>
+<div id="column1" class="mycolumn" style="width:47.25%;">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span 
+      id="cb1-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box::reload(Abox) <span class="co">#just include name, not full pathway/folder</span></span>
+</code></pre></div>
+</div>
+<div id="column2" class="mycolumn" style="width:47.25%;">
+Restart R Session (Shift+Ctrl+F10) and then re-run all code (including `box::use()`) 
+</div>
+</div>
 
 
+### Pathways
+
+<div id="column1" style="float:left; width:49.25%;">
+<div style="text-indent:25px;">Use a box module <b>within</b> the same folder</div>
+
+  <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span 
+      id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#within Abox.R file</span></span>
+<span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box::<span class="fu">use</span>( ./admin)  </span>
+</code></pre></div>
+
+  <div class="sourceCode" id="cb2"><pre class="sourceCode r" style="border: 1px solid white;"><code class="sourceCode r"><span 
+      id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>DIR_ROOT  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>| </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>|---myboxes <span class="co">#folder with modules</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>|   |  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>|   |---Abox.R   </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>|   |---admin.R  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>|   |---Bbox.R  </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>|   </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>|---my.Rmd <span class="co">#rmd file using box modules</span></span>
+</code></pre></div>
+</div>
+<div id="column2" style="float:left; width:49%;">
+<div style="text-indent:25px;">Use a box module <b>up at directory</b></div>
+
+  <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span 
+      id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#within reports/my.Rmd file</span></span>
+<span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box::<span class="fu">use</span>( ../myboxes/admin)  </span>
+</code></pre></div>
+
+  <div class="sourceCode" id="cb2"><pre class="sourceCode r" style="border: 1px solid white;"><code class="sourceCode r"><span 
+      id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>DIR_ROOT  </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>| </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>|---myboxes <span class="co">#folder with modules</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>|   |  </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>|   |---Abox.R   </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>|   |---admin.R  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>|   |---Bbox.R  </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>|   </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>|---reports <span class="co">#rmd file using box modules</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>|   |  </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>|   |---my.Rmd   </span>
+</code></pre></div>
+</div>
+
+</div>
