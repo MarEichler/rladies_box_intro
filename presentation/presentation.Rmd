@@ -1,8 +1,8 @@
 ---
 title: "Introduction to `{box}` Package"
 subtitle: "<img class = 'icon' src='img/github-brands.svg' alt='GitHub Icon'><a target='_blank' href='https://github.com/MarEichler/rladies_box_intro'><code>MarEichler/rladies_box_intro</code></a><br> <img class = 'icon' src='img/file-pdf-solid.svg' alt='PDF file Icon'> <a target='_blank' href='https://github.com/MarEichler/rladies_box_intro/blob/main/presentation/presentation.pdf'><code>rladies_box_intro/presentation/presentation.pdf</code></a>"
-author: "Martha Eichlersmith"
-date: "R-Ladies Twin Cities (March 10, 2022)"
+author: "Martha Yvonne Eichlersmith"
+date: "R-Ladies Twin Cities<br>March 10, 2022"
 output: 
   slidy_presentation:
     duration: 20

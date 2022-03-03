@@ -41,7 +41,19 @@ h1.subtitle {
   margin-right: auto !important;
 }
 
+p.author {
+  font-family: Ubuntu Light;
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-variant: small-caps; 
+  font-size: 1.25em;
+}
 
+p.date {
+  line-height: 1.5;
+  font-family: Ubuntu Thin;
+  font-weight: bold;
+}
 
 body {
   font-family: Ubuntu;   
