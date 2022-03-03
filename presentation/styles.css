@@ -1,4 +1,26 @@
 
+/* add fonts */ 
+
+@font-face {
+    font-family: Ubuntu;
+    src: url("fonts/Ubuntu.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: Ubuntu Light;
+    src: url("fonts/Ubuntu Light.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: Ubuntu Mono;
+    src: url("fonts/Ubuntu Mono.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: Ubuntu Thin;
+    src: url("fonts/Ubuntu Thin.ttf") format('truetype');
+}
+
 :root {
   --darkblue: #495374; /* dark blue, same color scheme as box logo */ 
   --liteblue: #D1D5E6; /* light blue, same color scheme as box logo */ 
