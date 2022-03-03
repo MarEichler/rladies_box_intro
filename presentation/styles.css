@@ -16,9 +16,32 @@
 
 h1 {
   font-weight: bold; 
-  color: var(--darkblue) !important; 
+  color: var(--darkblue); 
   font-size: 2em !important;
 }
+
+
+img.icon {
+  height: 1.5em; 
+  text-align: center;
+  vertical-align: middle;
+  padding-right: 5px;
+}
+
+h1.subtitle {
+  font-weight: normal !important;
+  color: var(--darkgrey) !important;
+  font-size: 1em !important;
+  padding-top: 0px !important;
+  text-align: left !important;
+  line-height: 2 !important;
+  max-width: 610px;
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+
 
 body {
   font-family: Ubuntu;   
