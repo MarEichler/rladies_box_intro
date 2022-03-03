@@ -2,6 +2,8 @@
 
 Files for Thursday, March 10, 2022 R Ladies - Twin Cities 
 
+[View Slides](https://mareichler.github.io/rladies_box_intro/)
+
 
 ## R and Package Informaiton 
 
