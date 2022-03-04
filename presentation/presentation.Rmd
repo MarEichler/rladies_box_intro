@@ -365,6 +365,7 @@ More situations/dimensions &#8658; Longer function
 
 # Box: Write Your Functions/Code with Roxygen
 
+<div class="row">
 <div id="column1" style="float:left; width:60%;">
   <ul>
     <li>Can use anything within box modules within functions</li>
@@ -379,9 +380,10 @@ More situations/dimensions &#8658; Longer function
       <li><code><span class="cf">@examples</span></code>: examples of use</li>
       <li>can include as many or as few as you want </li>
       <li>best practice to include all but I often don't, c'est la vie</li>
-      <li><span style="font-family: Ubuntu Thin;">best practices are a <i>journey</i> not a destination</span></li>
     </ul>
   </ul>
+  <div class = "quote" style="text-align: center; width:100%;">Best practices are a <i>journey</i>, not a destination</div>
+<div class = "quotesource" style="width: 100%;">\- When I'm not implementing best practices</div>
 </div>
 <div id="column2" style="float:right; width:38%;">
   <b>Roxygen Skeleton</b>
@@ -401,6 +403,8 @@ More situations/dimensions &#8658; Longer function
 <span id="cb1-8"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&#39; </span><span class = "cf">@examples</span></span>
 </code></pre></div>
 </div>
+</div>
+
 
 
 # Box: Use Module Functions (EX_SHORT)

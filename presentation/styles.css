@@ -139,9 +139,10 @@ img.myimg {
 .quotesource{
   width: 75%;
   display: block;
-  margin-left: 12.5%;
-  margin-right: 12.5%;
+  margin-left: auto;
+  margin-right: auto;
   text-align: right; 
+  padding-top:10px;
 }
 
 .colheader {
@@ -167,6 +168,12 @@ img.myimg {
   margin-bottom: 0px;
 }
 
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
  
  div.keeptogether  {
   -webkit-column-break-inside: avoid;
