@@ -1,6 +1,6 @@
 ---
-title: "Introduction to `{box}` Package"
-subtitle: "<img class = 'icon' src='img/github-brands.svg' alt='GitHub Icon'><a target='_blank' href='https://github.com/MarEichler/rladies_box_intro'><code>MarEichler/rladies_box_intro</code></a><br> <img class = 'icon' src='img/file-pdf-solid.svg' alt='PDF file Icon'> <a target='_blank' href='https://github.com/MarEichler/rladies_box_intro/blob/main/presentation/presentation.pdf'><code>rladies_box_intro/presentation/presentation.pdf</code></a>"
+title: "Introduction to `{box}`"
+subtitle: "<a target='_blank' href='https://klmr.me/box/'><img class = 'icon' src='img/cube-solid.svg' alt='box package'><code>klmr.me/box</code></a><br><a target='_blank' href='https://github.com/MarEichler/rladies_box_intro'><img class = 'icon' src='img/github-brands.svg' alt='GitHub Icon'><code>MarEichler/rladies_box_intro</code></a><br><a target='_blank' href='https://github.com/MarEichler/rladies_box_intro/blob/main/presentation/presentation.pdf'><img class = 'icon' src='img/file-pdf-solid.svg' alt='PDF file Icon'> <code>rladies_box_intro/presentation/presentation.pdf</code></a>"
 author: "Martha Yvonne Eichlersmith"
 date: "R-Ladies Twin Cities<br>March 10, 2022"
 output: 
@@ -49,7 +49,7 @@ Introduce the `{box}` package and show how it can be used to write modularized/o
   * purposeful and organized code 
   * if change code within box module, importation of box module doesn't change   
 
-<div style="font-family: Ubuntu Thin; font-size: 1.25em; line-height: 1.5; padding-top: 10px; padding-bottom: 10px;">Box modules are like mini-packages: help re-use or share code without the much larger hurdle of developing a whole R package</div>
+<div class="quote">Box modules are like mini-packages: help re-use or share code without the much larger hurdle of developing a whole R package</div>
 
 - re-use code for yourself if doing similar actions frequently 
 - share code internally with peers/colleague (create consistency)
@@ -258,10 +258,7 @@ More situations/dimensions &#8658; Longer function
 </table>
 
 
-# 
-
-<br><br><br><br><br><br>
-<center style="font-size: 2.5em; font-weight: bold;">Let's Learn how to use <code>{box}</code><center>
+# Let's learn how to use `{box}` {style="padding: 5.85em 0px; margin-left: 105px !important; font-size: 1.25em; text-align: center;"}
 
 # Box: File/Folder Structure 
 
