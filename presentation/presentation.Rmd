@@ -5,7 +5,6 @@ author: "Martha Yvonne Eichlersmith"
 date: "R-Ladies Twin Cities<br>March 10, 2022"
 output: 
   slidy_presentation:
-    duration: 20
     footer: M. Y. Eichlersmith | March 10th 2022 | R Ladies Twin Cities
     css: styles.css
 
